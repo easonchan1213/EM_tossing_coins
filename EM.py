@@ -1,3 +1,5 @@
+#-*- coding: utf-8 -*-
+
 import math
 from collections import Counter
 observed_data = ['HTTTHHTHTH','HHHHTHHHHH','HTHHHHHTHH','HTHTTTHHTT','THHHTHHHTH']
@@ -11,14 +13,14 @@ def getPosterior(thetaA,thetaB,heads,tails,verbose=False):
 	coinA = (round(conditional_thetaA*heads,2),round(conditional_thetaA*tails,2))
 	coinB = (round(conditional_thetaB*heads,2),round(conditional_thetaB*tails,2))
 	if verbose:
-		print 'Estimated thetaA:%f , estimated thetaB:%f' % (conditional_thetaA,conditional_thetaB)
+		print u'Estimated θ(A):%f , estimated θ(B):%f' % (conditional_thetaA,conditional_thetaB)
 
 	return conditional_thetaA,conditional_thetaB,coinA[0],coinA[1],coinB[0],coinB[1]
 
 if __name__ == '__main__':
 	thetaA,thetaB = 0.6,0.5 # One can play with this initial parameters around and get the same outcome (under thetaA >= thetaB)
 	iterations = 10
-	print 'Initial parameters : thetaA=%f thetaB=%f \n' % (thetaA,thetaB)
+	print u'Initial parameters : θ(A)=%f θ(B)=%f \n' % (thetaA,thetaB)
 	for i in xrange(1,iterations+1):
 		coinAheads_total,coinAtails_total = 0,0
 		coinBheads_total,coinBtails_total = 0,0
@@ -40,5 +42,5 @@ if __name__ == '__main__':
 
 		thetaA = coinAheads_total / (coinAheads_total+coinAtails_total)
 		thetaB = coinBheads_total / (coinBheads_total+coinBtails_total)
-		print 'Round %i : Estimated thetaA:%f , estimated thetaB:%f \n' % (i,thetaA,thetaB)
+		print u'Round %i : Estimated θ(A):%f , estimated θ(B):%f \n' % (i,thetaA,thetaB)
 
